@@ -17,22 +17,37 @@ class Inspect(object):
         self.fk_fields = []
         self.m2m_fields = []
 
-        self._setup_fields()
-        self._setup_rel_fields()
+        self.local_fields = []
 
-    def _setup_fields(self):
-        for field in self.opts.local_fields:
-            self.fields.append(field.name)
+        self.backwards_fk_fields = []
+        self.backwards_m2m_fields = []
 
-    def _setup_rel_fields(self):
-        for name in self.opts.get_all_field_names():
-            field, model, direct, m2m = self.opts.get_field_by_name(name)
-            if not direct:
-                name = field.get_accessor_name()
-                field = field.field
-            if not field.rel:
-                continue
-            if m2m:
-                self.m2m_fields.append(name)
-            else:
+        self.all_fk_fields = []
+        self.all_m2m_fields = []
+
+        self._setup_local_fields()
+        self._setup_backwards_fields()
+
+    def _setup_local_fields(self):
+        for field in self.opts.local_fields + self.opts.many_to_many:
+            name = field.name
+            if isinstance(field, models.ForeignKey):
                 self.fk_fields.append(name)
+                self.all_fk_fields.append(name)
+            elif isinstance(field, models.ManyToManyField):
+                self.m2m_fields.append(name)
+                self.all_m2m_fields.append(name)
+            else:
+                self.fields.append(name)
+            self.local_fields.append(name)
+
+    def _setup_backwards_fields(self):
+        for related in self.opts.get_all_related_objects() + self.opts.get_all_related_many_to_many_objects():
+            name = related.get_accessor_name()
+            field = related.field
+            if hasattr(field, "m2m_field_name"):
+                self.backwards_m2m_fields.append(name)
+                self.all_m2m_fields.append(name)
+            else:
+                self.backwards_fk_fields.append(name)
+                self.all_fk_fields.append(name)
