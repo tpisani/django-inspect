@@ -34,7 +34,8 @@ class InspectTests(TestCase):
                                                             "anotherfk_set"])
 
     def test_all_fk_fields(self):
-        self.assertEqual(self.inspect.all_fk_fields, ["fk_set",
+        self.assertEqual(self.inspect.all_fk_fields, ["direct_fk",
+                                                      "fk_set",
                                                       "anotherfk_set"])
 
     def test_m2m_fields(self):
