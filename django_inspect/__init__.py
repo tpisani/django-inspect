@@ -13,6 +13,7 @@ class Inspect(object):
 
         self.model = model
         self.opts = model._meta
+
         self.fields = []
         self.fk_fields = []
         self.m2m_fields = []
@@ -28,26 +29,33 @@ class Inspect(object):
         self._setup_local_fields()
         self._setup_backwards_fields()
 
-    def _setup_local_fields(self):
-        for field in self.opts.local_fields + self.opts.many_to_many:
-            name = field.name
+    def _setup_fields(self, backwards, fields):
+        for field in fields:
+            if backwards:
+                name = field.get_accessor_name()
+                field = field.field
+            else:
+                name = field.name
+                self.local_fields.append(name)
             if isinstance(field, models.ForeignKey):
-                self.fk_fields.append(name)
+                if backwards:
+                    self.backwards_fk_fields.append(name)
+                else:
+                    self.fk_fields.append(name)
                 self.all_fk_fields.append(name)
             elif isinstance(field, models.ManyToManyField):
-                self.m2m_fields.append(name)
+                if backwards:
+                    self.backwards_m2m_fields.append(name)
+                else:
+                    self.m2m_fields.append(name)
                 self.all_m2m_fields.append(name)
             else:
                 self.fields.append(name)
-            self.local_fields.append(name)
+
+    def _setup_local_fields(self):
+        self._setup_fields(False, self.opts.local_fields
+                                + self.opts.many_to_many)
 
     def _setup_backwards_fields(self):
-        for related in self.opts.get_all_related_objects() + self.opts.get_all_related_many_to_many_objects():
-            name = related.get_accessor_name()
-            field = related.field
-            if hasattr(field, "m2m_field_name"):
-                self.backwards_m2m_fields.append(name)
-                self.all_m2m_fields.append(name)
-            else:
-                self.backwards_fk_fields.append(name)
-                self.all_fk_fields.append(name)
+        self._setup_fields(True, self.opts.get_all_related_objects()
+                               + self.opts.get_all_related_many_to_many_objects())
