@@ -47,3 +47,14 @@ class InspectTests(TestCase):
     def test_all_m2m_fields(self):
         self.assertEqual(self.inspect.all_m2m_fields, ["many_to_many",
                                                        "manytomany_set"])
+
+    def test_all_fields(self):
+        self.assertEqual(self.inspect.all_fields, ["id",
+                                                   "int",
+                                                   "char",
+                                                   "text",
+                                                   "direct_fk",
+                                                   "many_to_many",
+                                                   "fk_set",
+                                                   "anotherfk_set",
+                                                   "manytomany_set"])

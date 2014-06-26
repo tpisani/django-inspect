@@ -26,6 +26,8 @@ class Inspect(object):
         self.all_fk_fields = []
         self.all_m2m_fields = []
 
+        self.all_fields = []
+
         self._setup_local_fields()
         self._setup_backwards_fields()
 
@@ -51,6 +53,7 @@ class Inspect(object):
                 self.all_m2m_fields.append(name)
             else:
                 self.fields.append(name)
+            self.all_fields.append(name)
 
     def _setup_local_fields(self):
         self._setup_fields(False, self.opts.local_fields
