@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="django-inspect",
     description="Provides information about django models",
-    version="0.1dev",
+    version="0.1",
     packages=find_packages(),
     author="Thiago Pisani",
     author_email="pisani.thiago@gmail.com",
