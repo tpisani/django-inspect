@@ -11,7 +11,7 @@ setup(
     license="BSD",
     install_requires=["Django"],
     classifiers=[
-        "Enviroment :: Web Enviroment",
+        "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
