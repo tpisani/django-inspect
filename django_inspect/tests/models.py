@@ -10,6 +10,7 @@ class InspectModel(models.Model):
     char = models.CharField()
     text = models.TextField()
     direct_fk = models.ForeignKey("DirectFK")
+    many_to_many = models.ManyToManyField("AnotherManyToMany")
 
 
 class FK(models.Model):
@@ -26,3 +27,7 @@ class DirectFK(models.Model):
 
 class ManyToMany(models.Model):
     inspect_model = models.ManyToManyField(InspectModel)
+
+
+class AnotherManyToMany(models.Model):
+    pass

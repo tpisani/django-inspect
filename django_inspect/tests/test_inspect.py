@@ -17,12 +17,44 @@ class InspectTests(TestCase):
                                                "int",
                                                "char",
                                                "text",
-                                               "direct_fk"])
+                                               "direct_fk",
+                                               "many_to_many"])
+
+    def test_non_rel_fields(self):
+        self.assertEqual(self.inspect.non_rel_fields, ["id",
+                                                       "int",
+                                                       "char",
+                                                       "text"])
 
     def test_fk_fields(self):
-        self.assertEqual(self.inspect.fk_fields, ["anotherfk_set",
-                                                  "direct_fk",
-                                                  "fk_set"])
+        self.assertEqual(self.inspect.fk_fields, ["direct_fk"])
+
+    def test_backwards_fk_fields(self):
+        self.assertEqual(self.inspect.backwards_fk_fields, ["fk_set",
+                                                            "anotherfk_set"])
+
+    def test_all_fk_fields(self):
+        self.assertEqual(self.inspect.all_fk_fields, ["direct_fk",
+                                                      "fk_set",
+                                                      "anotherfk_set"])
 
     def test_m2m_fields(self):
-        self.assertEqual(self.inspect.m2m_fields, ["manytomany_set"])
+        self.assertEqual(self.inspect.m2m_fields, ["many_to_many"])
+
+    def test_backwards_m2m_fields(self):
+        self.assertEqual(self.inspect.backwards_m2m_fields, ["manytomany_set"])
+
+    def test_all_m2m_fields(self):
+        self.assertEqual(self.inspect.all_m2m_fields, ["many_to_many",
+                                                       "manytomany_set"])
+
+    def test_all_fields(self):
+        self.assertEqual(self.inspect.all_fields, ["id",
+                                                   "int",
+                                                   "char",
+                                                   "text",
+                                                   "direct_fk",
+                                                   "many_to_many",
+                                                   "fk_set",
+                                                   "anotherfk_set",
+                                                   "manytomany_set"])
