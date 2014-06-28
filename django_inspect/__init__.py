@@ -15,10 +15,11 @@ class Inspect(object):
         self.opts = model._meta
 
         self.fields = []
+
+        self.non_rel_fields = []
+
         self.fk_fields = []
         self.m2m_fields = []
-
-        self.local_fields = []
 
         self.backwards_fk_fields = []
         self.backwards_m2m_fields = []
@@ -38,7 +39,7 @@ class Inspect(object):
                 field = field.field
             else:
                 name = field.name
-                self.local_fields.append(name)
+                self.fields.append(name)
             if isinstance(field, models.ForeignKey):
                 if backwards:
                     self.backwards_fk_fields.append(name)
@@ -52,7 +53,7 @@ class Inspect(object):
                     self.m2m_fields.append(name)
                 self.all_m2m_fields.append(name)
             else:
-                self.fields.append(name)
+                self.non_rel_fields.append(name)
             self.all_fields.append(name)
 
     def _setup_local_fields(self):

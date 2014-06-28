@@ -16,15 +16,15 @@ class InspectTests(TestCase):
         self.assertEqual(self.inspect.fields, ["id",
                                                "int",
                                                "char",
-                                               "text"])
+                                               "text",
+                                               "direct_fk",
+                                               "many_to_many"])
 
-    def test_local_fields(self):
-        self.assertEqual(self.inspect.local_fields, ["id",
-                                                     "int",
-                                                     "char",
-                                                     "text",
-                                                     "direct_fk",
-                                                     "many_to_many"])
+    def test_non_rel_fields(self):
+        self.assertEqual(self.inspect.non_rel_fields, ["id",
+                                                       "int",
+                                                       "char",
+                                                       "text"])
 
     def test_fk_fields(self):
         self.assertEqual(self.inspect.fk_fields, ["direct_fk"])
