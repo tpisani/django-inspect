@@ -1,1 +1,4 @@
+include LICENSE
+include README.rst
 recursive-exclude django_inspect/tests *
+recursive-exclude * *.py[co]
