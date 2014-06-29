@@ -13,8 +13,7 @@ all_fields
     All model fields, including all relationships (back and forth).
 
 fields
-    Only local fields, ie. any regular field and relationships,
-    excluding backwards relationships.
+    Only local fields, ie. any regular field and relationships (excluding backwards).
 
 non_rel_fields
     Basically the same thing as **fields**, but excluding all relationships.
@@ -36,6 +35,7 @@ backwards_m2m_fields
 
 all_m2m_fields
     All many to many fields (back and forth).
+
 
 Installation
 ------------
