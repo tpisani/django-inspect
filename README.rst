@@ -56,7 +56,7 @@ Usage
 
     from django_inspect import Inspect
 
-    # passing a User instance/object is also possible
+    # passing an instance/object is also possible
     inspect = Inspect(User)
 
     inspect.fields
