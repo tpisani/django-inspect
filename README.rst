@@ -1,8 +1,6 @@
 django-inspect
 ==============
 
-**Note that this package is still in progress, there is much more to come.**
-
 Provides information about `django <https://www.djangoproject.com/>`_ models by
 a series of conveniences, such as its fields (local, foreign keys, many to many).
 Its only requirement is any version of django.
@@ -56,7 +54,7 @@ Usage
 
     from django_inspect import Inspect
 
-    # passing a User instance/object is also possible
+    # passing an instance/object is also possible
     inspect = Inspect(User)
 
     inspect.fields
