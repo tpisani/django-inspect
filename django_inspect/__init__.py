@@ -8,7 +8,7 @@ class Inspect(object):
     def __init__(self, model):
         if not inspect.isclass(model):
             model = model.__class__
-        if not models.Model in model.mro():
+        if models.Model not in model.mro():
             raise TypeError("{} is not a django model".format(model.__name__))
 
         self.model = model
