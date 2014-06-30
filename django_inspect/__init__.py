@@ -4,6 +4,10 @@ from django.db import models
 
 
 class Inspect(object):
+    """
+    Provides information about django models by a series of conveniences,
+    such as its fields (local, foreign keys, many to many).
+    """
 
     def __init__(self, model):
         if not inspect.isclass(model):
