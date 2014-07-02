@@ -36,25 +36,30 @@ class Inspect(object):
         self._setup_local_fields()
         self._setup_backwards_fields()
 
+    def _field_info(self, field):
+        return field.name, field
+
+    def _backwards_field_info(self, field):
+        return field.get_accessor_name(), field.field
+
     def _setup_fields(self, backwards, fields):
+        if backwards:
+            field_info = self._backwards_field_info
+            fk_list = self.backwards_fk_fields
+            m2m_list = self.backwards_m2m_fields
+        else:
+            field_info = self._field_info
+            fk_list = self.fk_fields
+            m2m_list = self.m2m_fields
         for field in fields:
-            if backwards:
-                name = field.get_accessor_name()
-                field = field.field
-            else:
-                name = field.name
+            name, field = field_info(field)
+            if not backwards:
                 self.fields.append(name)
             if isinstance(field, models.ForeignKey):
-                if backwards:
-                    self.backwards_fk_fields.append(name)
-                else:
-                    self.fk_fields.append(name)
+                fk_list.append(name)
                 self.all_fk_fields.append(name)
             elif isinstance(field, models.ManyToManyField):
-                if backwards:
-                    self.backwards_m2m_fields.append(name)
-                else:
-                    self.m2m_fields.append(name)
+                m2m_list.append(name)
                 self.all_m2m_fields.append(name)
             else:
                 self.non_rel_fields.append(name)
