@@ -65,7 +65,7 @@ Installation
 Usage
 =====
 
-.. code::python
+.. code:: python
 
     from django.contrib.auth.models import User
 
