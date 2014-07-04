@@ -58,3 +58,18 @@ class InspectTests(TestCase):
                                                    "fk_set",
                                                    "anotherfk_set",
                                                    "manytomany_set"])
+
+    def test_sub_inspect_should_raise_typeerror_when_given_a_non_rel_field(self):
+        self.assertRaises(TypeError, self.inspect.sub_inspect, "char")
+
+    def test_sub_inspect(self):
+        direct_fk_inspect = self.inspect.sub_inspect("direct_fk")
+        self.assertEqual(direct_fk_inspect.all_fields, ["id",
+                                                        "bigint",
+                                                        "boolean",
+                                                        "inspectmodel_set"])
+
+    def test_sub_inspect_backwards_field(self):
+        manytomany_set_inspect = self.inspect.sub_inspect("manytomany_set")
+        self.assertEqual(manytomany_set_inspect.all_fields, ["id",
+                                                             "inspect_model"])
