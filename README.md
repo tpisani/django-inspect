@@ -6,7 +6,7 @@ a series of conveniences, such as its fields (local, foreign keys, many to many)
 
 Its only requirement is any version of django.
 
-Here is a resume of what **django-inspect** offers:
+### Conveniences attributes
 
 * all_fields
 
@@ -45,11 +45,21 @@ Here is a resume of what **django-inspect** offers:
     All many to many fields (back and forth).
 
 
+### Sub-inspecting
+
+**django-inspect** is able to futher inspect a field, all you have to do is
+to call `inspect.sub_inspect("some_field")`. See [usage](#usage) for more.
+
+**NOTE:** This method is only available for relationship fields.
+
+
 ## Installation
 
 **django-inspect** is available through **pip**:
 
-    pip install django-inspect
+```
+pip install django-inspect
+```
 
 
 ## Usage
@@ -59,7 +69,7 @@ from django.contrib.auth.models import User
 
 from django_inspect import Inspect
 
-# passing an instance/object is also possible
+# Using an instance/object is also possible
 inspect = Inspect(User)
 
 inspect.fields
@@ -77,4 +87,12 @@ inspect.m2m_fields
 
 inspect.backwards_fk_fields
 ['logentry_set']
+
+# Sub-inspecting
+
+sub_inspect = inspect.sub_inspect("logentry_set")
+
+sub_inspect.all_fields
+[u'id', 'action_time', 'user', 'content_type', 'object_id',
+ 'object_repr', 'action_flag', 'change_message']
 ```
