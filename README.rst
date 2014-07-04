@@ -61,7 +61,6 @@ Installation
     pip install django-inspect
 
 
-
 Usage
 =====
 
