@@ -72,3 +72,13 @@ class Inspect(object):
     def _setup_backwards_fields(self):
         self._setup_fields(True, self.opts.get_all_related_objects()
                                + self.opts.get_all_related_many_to_many_objects())
+
+    def sub_inspect(self, fieldname):
+        if fieldname in self.non_rel_fields:
+            raise TypeError("{} is not a relationship".format(fieldname))
+        descriptor = getattr(self.model, fieldname)
+        if fieldname in self.fk_fields:
+            model = descriptor.field.rel.to
+        else:
+            model = descriptor.related.field.model
+        return self.__class__(model)
