@@ -54,25 +54,27 @@ Here is a resume of what **django-inspect** offers:
 
 ## Usage
 
-    from django.contrib.auth.models import User
+```python
+from django.contrib.auth.models import User
 
-    from django_inspect import Inspect
+from django_inspect import Inspect
 
-    # passing an instance/object is also possible
-    inspect = Inspect(User)
+# passing an instance/object is also possible
+inspect = Inspect(User)
 
-    inspect.fields
-    [u'id', 'password', 'last_login', 'is_superuser', 'username',
-     'first_name', 'last_name', 'email', 'is_staff', 'is_active',
-     'date_joined', 'groups', 'user_permissions']
+inspect.fields
+[u'id', 'password', 'last_login', 'is_superuser', 'username',
+ 'first_name', 'last_name', 'email', 'is_staff', 'is_active',
+ 'date_joined', 'groups', 'user_permissions']
 
-    inspect.non_rel_fields
-    [u'id', 'password', 'last_login', 'is_superuser', 'username',
-     'first_name', 'last_name', 'email', 'is_staff', 'is_active',
-     'date_joined']
+inspect.non_rel_fields
+[u'id', 'password', 'last_login', 'is_superuser', 'username',
+ 'first_name', 'last_name', 'email', 'is_staff', 'is_active',
+ 'date_joined']
 
-    inspect.m2m_fields
-    ['groups', 'user_permissions']
+inspect.m2m_fields
+['groups', 'user_permissions']
 
-    inspect.backwards_fk_fields
-    ['logentry_set']
+inspect.backwards_fk_fields
+['logentry_set']
+```
