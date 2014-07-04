@@ -22,7 +22,8 @@ class AnotherFK(models.Model):
 
 
 class DirectFK(models.Model):
-    pass
+    bigint = models.BigIntegerField()
+    boolean = models.BooleanField()
 
 
 class ManyToMany(models.Model):
