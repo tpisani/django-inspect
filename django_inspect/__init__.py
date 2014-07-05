@@ -77,9 +77,10 @@ class Inspect(object):
         if isinstance(path, basestring):
             path = path.split(".")
         fieldname = path.pop(0)
-        if fieldname in self.non_rel_fields:
+        try:
+            descriptor = getattr(self.model, fieldname)
+        except AttributeError:
             raise TypeError("{} is not a relationship".format(fieldname))
-        descriptor = getattr(self.model, fieldname)
         if hasattr(descriptor, "field"):
             model = descriptor.field.rel.to
         else:
