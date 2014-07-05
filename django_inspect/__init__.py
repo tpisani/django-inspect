@@ -73,12 +73,18 @@ class Inspect(object):
         self._setup_fields(True, self.opts.get_all_related_objects()
                                + self.opts.get_all_related_many_to_many_objects())
 
-    def sub_inspect(self, fieldname):
-        if fieldname in self.non_rel_fields:
+    def sub_inspect(self, path):
+        if isinstance(path, basestring):
+            path = path.split(".")
+        fieldname = path.pop(0)
+        try:
+            descriptor = getattr(self.model, fieldname)
+        except AttributeError:
             raise TypeError("{} is not a relationship".format(fieldname))
-        descriptor = getattr(self.model, fieldname)
-        if fieldname in self.fk_fields:
+        if hasattr(descriptor, "field"):
             model = descriptor.field.rel.to
         else:
             model = descriptor.related.field.model
+        if path:
+            return self.__class__(model).sub_inspect(path)
         return self.__class__(model)

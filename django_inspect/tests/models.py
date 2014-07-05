@@ -31,4 +31,9 @@ class ManyToMany(models.Model):
 
 
 class AnotherManyToMany(models.Model):
-    pass
+    some_item = models.ForeignKey("SomeItem")
+
+
+class SomeItem(models.Model):
+    date = models.DateField()
+    decimal = models.DecimalField()

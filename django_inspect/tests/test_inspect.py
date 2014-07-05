@@ -73,3 +73,10 @@ class InspectTests(TestCase):
         manytomany_set_inspect = self.inspect.sub_inspect("manytomany_set")
         self.assertEqual(manytomany_set_inspect.all_fields, ["id",
                                                              "inspect_model"])
+
+    def test_sub_inspect_by_path(self):
+        path_inspect = self.inspect.sub_inspect("many_to_many.some_item")
+        self.assertEqual(path_inspect.all_fields, ["id",
+                                                   "date",
+                                                   "decimal",
+                                                   "anothermanytomany_set"])

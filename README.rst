@@ -11,8 +11,8 @@ Its only requirement is any version of django.
 Features
 ========
 
-Conveniences attributes
------------------------
+Convenience attributes
+----------------------
 
 all_fields
     All model fields, including all relationships (back and forth).
@@ -45,10 +45,11 @@ all_m2m_fields
 Sub-inspecting
 --------------
 
-**django-inspect** is able to futher inspect a field, all you have to do is
-to call ``inspect.sub_inspect("some_field")``. See `usage <#usage>`_ for more.
+**django-inspect** is able to futher inspect a field, all you have to do is to call
+``inspect.sub_inspect("field")``, or by path ``inspect.sub_inspect("field.subfield")``.
+See `usage <#usage>`_ for more.
 
-**NOTE:** This method is only available for relationship fields.
+**NOTE:** Sub-inspecting is only available for relationship fields.
 
 
 Installation
@@ -96,3 +97,10 @@ Usage
     sub_inspect.all_fields
     [u'id', 'action_time', 'user', 'content_type', 'object_id',
      'object_repr', 'action_flag', 'change_message']
+
+    # Sub-inspecting by path
+
+    sub_inspect = inspect.sub_inspect("logentry_set.content_type")
+
+    sub_inspect.all_fields
+    [u'id', 'name', 'app_label', 'model', 'permission_set', 'logentry_set']
