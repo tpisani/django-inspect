@@ -74,7 +74,7 @@ class Inspect(object):
                                + self.opts.get_all_related_many_to_many_objects())
 
     def sub_inspect(self, path):
-        if not isinstance(path, list):
+        if isinstance(path, basestring):
             path = path.split(".")
         fieldname = path.pop(0)
         if fieldname in self.non_rel_fields:
