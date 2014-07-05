@@ -2,8 +2,8 @@
 django-inspect
 ==============
 
-Provides information about `django <https://www.djangoproject.com/>`_ models by
-a series of conveniences, such as its fields (local, foreign keys, many to many).
+Provides inspection conveniences for `django <https://www.djangoproject.com/>`_
+models, such as its fields (local, foreign keys, many to many).
 
 Its only requirement is any version of django.
 
