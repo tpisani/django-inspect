@@ -87,7 +87,9 @@ class Inspect(object):
         try:
             descriptor = getattr(self.model, fieldname)
         except AttributeError:
-            raise TypeError("{} is not a relationship".format(fieldname))
+            raise TypeError("{model}.{field} does not exist"
+                            " or is not a relationship".format(model=self.model.__name__,
+                                                               field=fieldname))
         if hasattr(descriptor, "field"):
             model = descriptor.field.rel.to
         else:
