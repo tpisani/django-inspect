@@ -5,7 +5,7 @@ from django.db import models
 
 class Inspect(object):
     """
-    Provides information about django models by a series of conveniences,
+    Provides inspection conveniences for django models,
     such as its fields (local, foreign keys, many to many).
     """
 
@@ -14,27 +14,15 @@ class Inspect(object):
             model = model.__class__
         if models.Model not in model.mro():
             raise TypeError("{} is not a django model".format(model.__name__))
-
+        self._setup_ready = False
         self.model = model
         self.opts = model._meta
 
-        self.fields = []
-
-        self.non_rel_fields = []
-
-        self.fk_fields = []
-        self.m2m_fields = []
-
-        self.backwards_fk_fields = []
-        self.backwards_m2m_fields = []
-
-        self.all_fk_fields = []
-        self.all_m2m_fields = []
-
-        self.all_fields = []
-
-        self._setup_local_fields()
-        self._setup_backwards_fields()
+    def __getattr__(self, name):
+        if not self._setup_ready:
+            self._setup()
+            self._setup_ready = True
+        return super(Inspect, self).__getattribute__(name)
 
     def _field_info(self, field):
         return field.name, field
@@ -73,6 +61,25 @@ class Inspect(object):
         self._setup_fields(True, self.opts.get_all_related_objects()
                                + self.opts.get_all_related_many_to_many_objects())
 
+    def _setup(self):
+        self.fields = []
+
+        self.non_rel_fields = []
+
+        self.fk_fields = []
+        self.m2m_fields = []
+
+        self.backwards_fk_fields = []
+        self.backwards_m2m_fields = []
+
+        self.all_fk_fields = []
+        self.all_m2m_fields = []
+
+        self.all_fields = []
+
+        self._setup_local_fields()
+        self._setup_backwards_fields()
+
     def sub_inspect(self, path):
         if isinstance(path, basestring):
             path = path.split(".")
@@ -85,6 +92,7 @@ class Inspect(object):
             model = descriptor.field.rel.to
         else:
             model = descriptor.related.field.model
+        inspect = self.__class__(model)
         if path:
-            return self.__class__(model).sub_inspect(path)
-        return self.__class__(model)
+            return inspect.sub_inspect(path)
+        return inspect
