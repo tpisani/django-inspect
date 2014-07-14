@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="django-inspect",
-    version="0.3.1",
+    version="0.3.2",
     description="Provides inspection conveniences for django models",
     packages=find_packages(),
     author="Thiago Pisani",
