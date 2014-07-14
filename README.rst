@@ -47,7 +47,7 @@ Sub-inspecting
 
 **django-inspect** is able to futher inspect a field, all you have to do is to call
 ``inspect.sub_inspect("field")``, or by path ``inspect.sub_inspect("field.subfield")``.
-See `usage <#usage>`_ for more.
+See usage for more.
 
 **NOTE:** Sub-inspecting is only available for relationship fields.
 
