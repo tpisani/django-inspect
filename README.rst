@@ -43,7 +43,7 @@ Sub-inspecting
 --------------
 
 Futher inspection on relationship fields.
-After inspecting a model, creating an ``Inspect`` instance, call:
+After inspecting a model (creating an ``Inspect`` instance) call:
 
 ``inspect.sub_inspect("field")``
 
@@ -107,3 +107,20 @@ Usage
 
     sub_inspect.all_fields
     [u'id', 'name', 'app_label', 'model', 'permission_set', 'logentry_set']
+
+
+Testing
+=======
+
+Install **nose**:
+
+::
+
+    $ pip install nose
+
+
+Run tests:
+
+::
+
+    $ python runtests.py
