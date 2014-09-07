@@ -5,8 +5,7 @@ from django.db import models
 
 class Inspect(object):
     """
-    Provides inspection conveniences for django models,
-    such as its fields (local, foreign keys, many to many).
+    Provides inspection conveniences for django models.
     """
 
     def __init__(self, model):
