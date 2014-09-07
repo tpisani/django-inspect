@@ -2,10 +2,7 @@
 django-inspect
 ==============
 
-Provides inspection conveniences for `django <https://www.djangoproject.com/>`_
-models, such as its fields (local, foreign keys, many to many).
-
-Its only requirement is any version of django.
+Provides inspection conveniences for `django <https://www.djangoproject.com/>`_ models.
 
 
 Features
@@ -45,21 +42,27 @@ all_m2m_fields
 Sub-inspecting
 --------------
 
-**django-inspect** is able to futher inspect a field, all you have to do is to call
-``inspect.sub_inspect("field")``, or by path ``inspect.sub_inspect("field.subfield")``.
-See usage for more.
+Futher inspection on relationship fields.
+After inspecting a model (creating an ``Inspect`` instance) call:
 
-**NOTE:** Sub-inspecting is only available for relationship fields.
+``inspect.sub_inspect("field")``
+
+*Paths are supported too:*
+
+``inspect.sub_inspect("field.other_field..")``
+
+It returns a new ``Inspect`` instance, containing information about
+the target model of the relationship field.
 
 
 Installation
 ============
 
-**django-inspect** is available through **pip**:
+Available through **pip**:
 
 ::
 
-    pip install django-inspect
+    $ pip install django-inspect
 
 
 Usage
@@ -104,3 +107,42 @@ Usage
 
     sub_inspect.all_fields
     [u'id', 'name', 'app_label', 'model', 'permission_set', 'logentry_set']
+
+
+Testing
+=======
+
+
+Install django-inspect:
+-----------------------
+
+
+::
+
+    $ pip install -e .
+
+
+or
+
+
+::
+
+    $ python setup.py install
+
+
+Install `nose <http://nose.readthedocs.org/>`_:
+-----------------------------------------------
+
+
+::
+
+    $ pip install nose
+
+
+Run tests:
+----------
+
+
+::
+
+    $ python runtests.py
