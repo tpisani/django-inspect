@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from django_inspect import Inspect
-from django_inspect.tests.models import NotADjangoModel, InspectModel
+from django_inspect.tests.test_app.models import NotADjangoModel, InspectModel
 
 
 class InspectTests(TestCase):

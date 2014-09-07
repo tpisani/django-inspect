@@ -11,14 +11,15 @@ from nose import run_exit
 
 if not settings.configured:
     settings.configure(
-        DATABASES = {
+        DATABASES={
             "default": {
                 "ENGINE": "django.db.backends.sqlite3",
                 "NAME": "django-inspect.db",
             }
         },
-        DEBUG=False,
-        SITE_ID=1,
+        INSTALLED_APPS=[
+            "django_inspect.tests.test_app",
+        ]
     )
 
 try:

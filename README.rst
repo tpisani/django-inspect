@@ -2,6 +2,8 @@
 django-inspect
 ==============
 
+.. image:: https://travis-ci.org/tpisani/django-inspect.svg
+
 Provides inspection conveniences for `django <https://www.djangoproject.com/>`_ models.
 
 
