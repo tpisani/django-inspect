@@ -112,7 +112,27 @@ Usage
 Testing
 =======
 
-Install **nose**:
+
+Install django-inspect:
+-----------------------
+
+
+::
+
+    $ pip install -e .
+
+
+or
+
+
+::
+
+    $ python setup.py install
+
+
+Install `nose <http://nose.readthedocs.org/>`_:
+-----------------------------------------------
+
 
 ::
 
@@ -120,6 +140,8 @@ Install **nose**:
 
 
 Run tests:
+----------
+
 
 ::
 

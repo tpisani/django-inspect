@@ -2,13 +2,11 @@
 
 import sys
 
-from os.path import dirname, abspath
-
 import django
 
 from django.conf import settings
 
-from nose.plugins.plugintest import run_buffered as run
+from nose import run_exit
 
 
 if not settings.configured:
@@ -29,4 +27,4 @@ except AttributeError:
     pass
 
 if __name__ == "__main__":
-    run(argv=sys.argv)
+    run_exit(argv=sys.argv)
