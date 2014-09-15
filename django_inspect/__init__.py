@@ -11,7 +11,7 @@ class Inspect(object):
     def __init__(self, model):
         if not inspect.isclass(model):
             model = model.__class__
-        if models.Model not in model.mro():
+        if not issubclass(model, models.Model):
             raise TypeError("{} is not a django model".format(model.__name__))
         self._setup_ready = False
         self.model = model
@@ -20,7 +20,6 @@ class Inspect(object):
     def __getattr__(self, name):
         if not self._setup_ready:
             self._setup()
-            self._setup_ready = True
         return super(Inspect, self).__getattribute__(name)
 
     def _field_info(self, field):
@@ -78,6 +77,8 @@ class Inspect(object):
 
         self._setup_local_fields()
         self._setup_backwards_fields()
+
+        self._setup_ready = True
 
     def sub_inspect(self, path):
         if isinstance(path, basestring):
