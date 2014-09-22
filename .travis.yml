@@ -10,7 +10,7 @@ env:
 
 install:
     - pip install -q django==$DJANGO --use-mirrors
-    - pip install -q -e . --use-mirrors
+    - make install
 
 script:
-    - python runtests.py
+    - make test

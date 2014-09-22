@@ -2,7 +2,7 @@
 django-inspect
 ==============
 
-.. image:: https://travis-ci.org/tpisani/django-inspect.svg
+.. image:: https://api.travis-ci.org/tpisani/django-inspect.svg
 
 Provides inspection conveniences for `django <https://www.djangoproject.com/>`_ models.
 
@@ -115,36 +115,13 @@ Testing
 =======
 
 
-Install django-inspect:
------------------------
+Install
+-------
+
+Run ``make install`` to install dev requirements.
 
 
-::
+Run tests
+---------
 
-    $ pip install -e .
-
-
-or
-
-
-::
-
-    $ python setup.py install
-
-
-Install `nose <http://nose.readthedocs.org/>`_:
------------------------------------------------
-
-
-::
-
-    $ pip install nose
-
-
-Run tests:
-----------
-
-
-::
-
-    $ python runtests.py
+Run ``make test`` to run tests.
