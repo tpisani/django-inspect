@@ -5,7 +5,7 @@ from django_inspect import Inspect
 
 class InspectMetaclass(ModelBase):
     """
-    Simple metaclass for attaching Inspect instances to models.
+    Simple metaclass for easily attaching Inspect instances to models.
     """
 
     @staticmethod

@@ -57,6 +57,12 @@ It returns a new ``Inspect`` instance, containing information about
 the target model of the relationship field.
 
 
+Inspect Metaclass
+-----------------
+
+Easily attach ``Inspect`` instance to models. Making inspection available
+
+
 Installation
 ============
 
@@ -70,14 +76,20 @@ Available through **pip**:
 Usage
 =====
 
+Simple inspection
+-----------------
+
 .. code:: python
 
     from django.contrib.auth.models import User
 
     from django_inspect import Inspect
 
-    # Using an instance/object is also possible
     inspect = Inspect(User)
+    
+    # Using an instance/object is also possible.
+    # user = User()
+    # inspect = Inspect(user)
 
     inspect.fields
     [u'id', 'password', 'last_login', 'is_superuser', 'username',
@@ -95,20 +107,54 @@ Usage
     inspect.backwards_fk_fields
     ['logentry_set']
 
-    # Sub-inspecting
 
-    sub_inspect = inspect.sub_inspect("logentry_set")
+Sub-inspecting
+--------------
+
+.. code:: python
+
+    from django.contrib.auth.models import User
+
+    from django_inspect import Inspect
+
+    inspect = Inspect(User)
+
+    sub_inspect = inspect.sub_inspect("user_permissions")
 
     sub_inspect.all_fields
-    [u'id', 'action_time', 'user', 'content_type', 'object_id',
-     'object_repr', 'action_flag', 'change_message']
+    [u'id', 'name', 'content_type', 'codename']
+
+    futher_inspect = sub_inspect.sub_inspect("content_type")
+    futher_inspect.all_fields
+    [u'id', 'name', 'app_label', 'model']
 
     # Sub-inspecting by path
 
-    sub_inspect = inspect.sub_inspect("logentry_set.content_type")
+    sub_inspect = inspect.sub_inspect("user_permissions.content_type")
 
     sub_inspect.all_fields
-    [u'id', 'name', 'app_label', 'model', 'permission_set', 'logentry_set']
+    [u'id', 'name', 'app_label', 'model']
+
+
+Metaclass
+---------
+
+.. code:: python
+
+    from django.db import models
+
+    from django_inspect inport InspectMetaclass
+
+    class InspectableModel(models.Model):
+        __metaclass__ = InspectMetaclass
+        int = models.IntegerField()
+        char = models.CharField()
+        text = models.TextField()
+
+    obj = InspectableModel()
+
+    obj.inspect.all_fields
+    [u'id', 'int', 'char', 'text']
 
 
 Testing
