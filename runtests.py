@@ -18,7 +18,7 @@ if not settings.configured:
             }
         },
         INSTALLED_APPS=[
-            "django_inspect.tests.test_app",
+            "tests.test_app",
         ]
     )
 

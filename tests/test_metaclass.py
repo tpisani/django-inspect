@@ -1,7 +1,8 @@
 from django.test import TestCase
 
 from django_inspect import Inspect
-from django_inspect.tests.test_app.models import InspectableModel
+
+from tests.test_app.models import InspectableModel
 
 
 class InspectMetaclassTests(TestCase):
