@@ -1,7 +1,5 @@
 from django.db import models
 
-from django_inspect import InspectMetaclass
-
 
 class NotADjangoModel(object):
     pass
@@ -39,7 +37,3 @@ class AnotherManyToMany(models.Model):
 class SomeItem(models.Model):
     date = models.DateField()
     decimal = models.DecimalField()
-
-
-class InspectableModel(models.Model):
-    __metaclas__ = InspectMetaclass
