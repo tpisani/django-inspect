@@ -58,13 +58,6 @@ It returns a new ``Inspect`` instance, containing information about
 the target model of the relationship field.
 
 
-Inspect Metaclass
------------------
-
-Easily attach ``Inspect`` instances to models using ``InspectMetaclass``,
-making inspection even easier.
-
-
 Installation
 ============
 
@@ -136,27 +129,6 @@ Sub-inspecting
 
     sub_inspect.all_fields
     [u'id', 'name', 'app_label', 'model']
-
-
-Metaclass
----------
-
-.. code:: python
-
-    from django.db import models
-
-    from django_inspect inport InspectMetaclass
-
-    class InspectableModel(models.Model):
-        __metaclass__ = InspectMetaclass
-        int = models.IntegerField()
-        char = models.CharField()
-        text = models.TextField()
-
-    obj = InspectableModel()
-
-    obj.inspect.all_fields
-    [u'id', 'int', 'char', 'text']
 
 
 Testing
