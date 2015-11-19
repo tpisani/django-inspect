@@ -52,8 +52,9 @@ class Inspect(object):
             self.all_fields.append(name)
 
     def _setup_local_fields(self):
-        self._setup_fields(False, self.opts.local_fields
-                           + self.opts.many_to_many)
+        local_fields = tuple(self.opts.local_fields)
+        many_to_many = tuple(self.opts.many_to_many[:])
+        self._setup_fields(False, local_fields + many_to_many)
 
     def _setup_backwards_fields(self):
         self._setup_fields(True, self.opts.get_all_related_objects()
