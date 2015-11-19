@@ -9,7 +9,7 @@ setup(
     author_email="pisani.thiago@gmail.com",
     url="https://github.com/tpisani/django-inspect",
     license="BSD",
-    install_requires=["Django"],
+    install_requires=["Django<=1.8.6"],
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
